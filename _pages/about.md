@@ -14,5 +14,5 @@ You can find my CV here: [GUANHUA CHEN's CV](../assets/CV.pdf).
 Research Interests
 ======
 - Dialogue System
-- Reasoning ability in LLMs
-- Multi-Modal RAG
+- LLMs for Education and Traveling Application
+- Multi-Modal RAG for LLMs
