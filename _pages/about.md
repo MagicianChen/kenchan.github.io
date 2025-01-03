@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-I'm a second-year PhD student in Computer Science, [University of Macau](https://www.um.edu.mo/). I am very fortunate to be advised by [Prof. Derek F. Wong](https://www.fst.um.edu.mo/personal/derek-wong/) of [NLP2CT](https://nlp2ct.cis.umac.mo/) Lab. My current research interests focus on dialogue system, reasoning ability in large language models, and multi-modal RAG. Besides, I am also interested in developing AI-driven web applications.
+I'm a second-year PhD student in Computer Science, [University of Macau](https://www.um.edu.mo/), and a co-founder of a startup. I am very fortunate to be advised by [Prof. Derek F. Wong](https://www.fst.um.edu.mo/personal/derek-wong/) of [NLP2CT](https://nlp2ct.cis.umac.mo/) Lab. My current research interests focus on dialogue system, LLMs for education and traveling, and multi-modal RAG for LLMs. Besides, I am also interested in developing AI-driven applications to solve real-life problems.
 
 You can find my CV here: [GUANHUA CHEN's CV](../assets/CV.pdf).
 
