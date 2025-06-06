@@ -2,7 +2,7 @@
 title: "Not All LoRA Parameters Are Essential: Insights on Inference Necessity"
 collection: preprint
 category: preprint
-permalink: /publication/SGIC
+permalink: /publication/notLoRA
 excerpt: 'Chen, Guanhua, et al. "Not All LoRA Parameters Are Essential: Insights on Inference Necessity." arXiv preprint arXiv:2503.23360 (2025).'
 date: 2025-03-30
 venue: 'arXiv'
