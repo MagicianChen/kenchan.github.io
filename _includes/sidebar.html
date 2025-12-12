@@ -1,25 +1,322 @@
 {% include base_path %}
 
+<style>
+  .sidebar-enhanced {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 2rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  
+  /* 作者信息卡片 */
+  .author-profile-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .author-profile-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .author-profile-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* 头像样式 */
+  .author-profile-card .author__avatar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .author-profile-card .author__avatar img:hover {
+    transform: scale(1.05);
+  }
+  
+  /* 作者姓名 */
+  .author-profile-card .author__name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 1rem 0 0.5rem;
+    text-align: center;
+  }
+  
+  /* 作者描述 */
+  .author-profile-card .author__bio {
+    color: #6c757d;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* 社交链接 */
+  .author-profile-card .author__urls {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .author-profile-card .author__urls li {
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .author-profile-card .author__urls li:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .author-profile-card .author__urls a {
+    color: #495057;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .author-profile-card .author__urls a:hover {
+    color: #667eea;
+  }
+  
+  .author-profile-card .author__urls i {
+    width: 20px;
+    margin-right: 0.8rem;
+    color: #6c757d;
+    font-size: 1.1rem;
+  }
+  
+  /* 侧边栏内容区域 */
+  .sidebar-content {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .sidebar-section {
+    padding: 1.5rem;
+    border-bottom: 1px solid #f1f3f4;
+  }
+  
+  .sidebar-section:last-child {
+    border-bottom: none;
+  }
+  
+  /* 侧边栏标题 */
+  .sidebar-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #667eea;
+    display: inline-block;
+  }
+  
+  /* 侧边栏文本 */
+  .sidebar-text {
+    color: #495057;
+    line-height: 1.6;
+    font-size: 0.9rem;
+  }
+  
+  .sidebar-text p {
+    margin-bottom: 1rem;
+  }
+  
+  .sidebar-text p:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* 侧边栏图片 */
+  .sidebar-image-wrapper {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .sidebar-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 导航包装器 */
+  .sidebar-nav-wrapper {
+    padding: 1.5rem;
+    background: #f8f9fa;
+  }
+  
+  .sidebar-nav-wrapper .nav__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .sidebar-nav-wrapper .nav__list li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .sidebar-nav-wrapper .nav__list a {
+    color: #495057;
+    text-decoration: none;
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    display: block;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+  }
+  
+  .sidebar-nav-wrapper .nav__list a:hover {
+    background-color: #667eea;
+    color: white;
+    transform: translateX(4px);
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .sidebar-enhanced {
+      max-width: 100%;
+      margin-bottom: 2rem;
+    }
+    
+    .author-profile-card {
+      padding: 1.5rem;
+    }
+    
+    .author-profile-card .author__avatar img {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .author-profile-card .author__name {
+      font-size: 1.2rem;
+    }
+  }
+  
+  /* 深色模式支持 */
+  @media (prefers-color-scheme: dark) {
+    .sidebar-enhanced {
+      color: #e9ecef;
+    }
+    
+    .author-profile-card,
+    .sidebar-content {
+      background: #2d3748;
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .author-profile-card .author__name,
+    .sidebar-title {
+      color: #ffffff;
+    }
+    
+    .author-profile-card .author__bio,
+    .sidebar-text {
+      color: #cbd5e0;
+    }
+    
+    .author-profile-card .author__urls li:hover {
+      background-color: #4a5568;
+    }
+    
+    .sidebar-nav-wrapper {
+      background: #4a5568;
+    }
+  }
+  
+  /* 滚动优化 */
+  .sidebar-enhanced.sticky {
+    position: sticky;
+    top: 2rem;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+  }
+  
+  .sidebar-enhanced.sticky::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .sidebar-enhanced.sticky::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .sidebar-enhanced.sticky::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 2px;
+  }
+  
+  .sidebar-enhanced.sticky::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+  }
+</style>
+
 {% if page.author_profile or layout.author_profile or page.sidebar %}
-  <div class="sidebar sticky">
-  {% if page.author_profile or layout.author_profile %}{% include author-profile.html %}{% endif %}
-  {% if page.sidebar %}
-    {% for s in page.sidebar %}
-      {% if s.image %}
-        <img src=
-        {% if s.image contains "://" %}
-          "{{ s.image }}"
-        {% else %}
-          "{{ s.image | prepend: "/images/" | prepend: base_path }}"
-        {% endif %}
-        alt="{% if s.image_alt %}{{ s.image_alt }}{% endif %}">
-      {% endif %}
-      {% if s.title %}<h3>{{ s.title }}</h3>{% endif %}
-      {% if s.text %}{{ s.text | markdownify }}{% endif %}
-    {% endfor %}
-    {% if page.sidebar.nav %}
-      {% include nav_list nav=page.sidebar.nav %}
+  <div class="sidebar-enhanced sticky">
+    {% if page.author_profile or layout.author_profile %}
+      <div class="author-profile-card">
+        {% include author-profile.html %}
+      </div>
     {% endif %}
-  {% endif %}
+    
+    {% if page.sidebar %}
+      <div class="sidebar-content">
+        {% for s in page.sidebar %}
+          <div class="sidebar-section">
+            {% if s.image %}
+              <div class="sidebar-image-wrapper">
+                <img src=
+                {% if s.image contains "://" %}
+                  "{{ s.image }}"
+                {% else %}
+                  "{{ s.image | prepend: "/images/" | prepend: base_path }}"
+                {% endif %}
+                alt="{% if s.image_alt %}{{ s.image_alt }}{% endif %}"
+                class="sidebar-image">
+              </div>
+            {% endif %}
+            
+            {% if s.title %}
+              <h3 class="sidebar-title">{{ s.title }}</h3>
+            {% endif %}
+            
+            {% if s.text %}
+              <div class="sidebar-text">{{ s.text | markdownify }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+        
+        {% if page.sidebar.nav %}
+          <div class="sidebar-nav-wrapper">
+            {% include nav_list nav=page.sidebar.nav %}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
 {% endif %}
