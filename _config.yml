@@ -86,12 +86,12 @@ publication_category:
 
 # Competition Category - The following the list of competition categories and their headings
 competition_category:
-  nlp:
-    title: 'Natural Language Processing'
+  algorithm:
+    title: 'Algorithm Competition'
   startup:
     title: 'Start-up Competition'
   application:
-    title: 'AI Application'
+    title: 'AI Application Competition'
 
 
 # Site Settings
