@@ -1,6 +1,7 @@
 ---
 title: "The first price of APP Design Competition of University of Macau in 2019"
 collection: competitions
+category: application
 permalink: /competitions/2023-ai-competition
 date: 2019-12-03
 competition_url: 'https://www.um.edu.mo/news-and-press-releases/press-release/detail/49625/'
