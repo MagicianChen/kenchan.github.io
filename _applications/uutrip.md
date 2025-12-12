@@ -9,7 +9,7 @@ last_updated: "2025-10-25"
 latest_update: "WeChat Mini program has been released."
 website_url: "https://uutrip.ai"
 header:
-  teaser: "uutrip.jpg"
+  teaser: "uutrip.png"
 ---
 
 ## Application Overview
