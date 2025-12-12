@@ -8,67 +8,421 @@ author_profile: true
 {% include base_path %}
 
 <style>
+/* Competitions 页面样式 */
+.competitions-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+}
+
+.competitions-header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.competitions-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* 分类标题样式 */
+.competition-category {
+  margin: 3rem 0 2rem 0;
+  position: relative;
+}
+
+.category-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.category-title::before {
+  content: '';
+  width: 4px;
+  height: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 2px;
+}
+
+.category-divider {
+  height: 2px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, transparent 100%);
+  border: none;
+  margin: 1rem 0 2rem 0;
+  border-radius: 1px;
+}
+
+/* 比赛卡片样式 */
 .competition-item {
+  background: #ffffff;
+  border: 1px solid #e1e8ed;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.competition-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.competition-item:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  border-color: #667eea;
+}
+
+.competition-item:hover::before {
+  transform: scaleX(1);
+}
+
+.competition-container {
   display: flex;
   align-items: flex-start;
-  margin: 30px 0;
-  padding: 20px 0;
-  border-bottom: 1px solid #eee;
+  padding: 2rem;
+  gap: 2rem;
 }
 
 .competition-content {
   flex: 1;
-  padding-right: 30px;
+  min-width: 0;
 }
 
 .competition-image {
-  flex: 0 0 250px;
+  flex: 0 0 280px;
   text-align: center;
 }
 
 .competition-image img {
   max-width: 100%;
-  max-height: 200px;
+  max-height: 220px;
   object-fit: contain;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.competition-image img:hover {
+  transform: scale(1.02);
+}
+
+.competition-header {
+  margin-bottom: 1.5rem;
 }
 
 .competition-title {
-  margin: 0 0 10px 0;
-  font-size: 1.2em;
-  font-weight: bold;
+  margin: 0 0 1rem 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2c3e50;
+  line-height: 1.3;
+}
+
+.competition-title a {
+  color: #2c3e50;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.competition-title a:hover {
+  color: #667eea;
 }
 
 .competition-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #5a6c7d;
+  font-size: 0.9rem;
+}
+
+.meta-item i {
+  color: #667eea;
+  width: 16px;
+  text-align: center;
+}
+
+.competition-rank {
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  color: #8b5a00;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid #f7d794;
+  box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+}
+
+.competition-rank.first-place {
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  color: #8b5a00;
+}
+
+.competition-rank.second-place {
+  background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
   color: #666;
-  margin: 5px 0;
+}
+
+.competition-rank.third-place {
+  background: linear-gradient(135deg, #cd7f32 0%, #daa520 100%);
+  color: #5d4e37;
+}
+
+.competition-rank.other-place {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
 }
 
 .competition-description {
-  margin: 10px 0;
-  line-height: 1.5;
+  color: #5a6c7d;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
 }
 
-/* 移动端适配 */
+.competition-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f1f3f4;
+}
+
+.competition-links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.comp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid;
+}
+
+.comp-link--website {
+  background: #f8f9fa;
+  color: #007bff;
+  border-color: #007bff;
+}
+
+.comp-link--website:hover {
+  background: #007bff;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.comp-link--code {
+  background: #f8f9fa;
+  color: #28a745;
+  border-color: #28a745;
+}
+
+.comp-link--code:hover {
+  background: #28a745;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.comp-link--details {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+}
+
+.comp-link--details:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  color: white;
+}
+
+/* 统计信息 */
+.competitions-stats {
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f7ff 100%);
+  border: 1px solid #e3f2fd;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.stat-item {
+  padding: 1rem;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #667eea;
+  display: block;
+}
+
+.stat-label {
+  color: #5a6c7d;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* 成就徽章 */
+.achievement-badges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.achievement-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f7ff 100%);
+  color: #667eea;
+  border: 1px solid #e3f2fd;
+}
+
+/* 响应式设计 */
 @media (max-width: 768px) {
-  .competition-item {
-    flex-direction: column;
+  .competitions-header h1 {
+    font-size: 2rem;
   }
   
-  .competition-content {
-    padding-right: 0;
-    margin-bottom: 15px;
+  .competition-container {
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1.5rem;
   }
   
   .competition-image {
     flex: none;
+    order: -1;
+  }
+  
+  .competition-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .competition-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .competition-links {
+    justify-content: center;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .competitions-header {
+    padding: 1.5rem;
+  }
+  
+  .competition-container {
+    padding: 1rem;
+  }
+  
+  .competition-title {
+    font-size: 1.2rem;
+  }
+  
+  .competition-links {
+    flex-direction: column;
+  }
+  
+  .comp-link {
+    justify-content: center;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
 
-<!-- New style rendering if competition categories are defined -->
+<!-- 页面头部 -->
+<div class="competitions-header">
+  <h1><i class="fa fa-trophy"></i> Competitions</h1>
+  <p class="competitions-subtitle">Showcasing achievements in various programming and AI competitions</p>
+</div>
+
+<!-- 统计信息 -->
+<div class="competitions-stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <span class="stat-number">{{ site.competitions | size }}</span>
+      <div class="stat-label">Total Competitions</div>
+    </div>
+    {% if site.competition_category %}
+      {% for category in site.competition_category %}
+        <div class="stat-item">
+          {% assign category_count = 0 %}
+          {% for post in site.competitions %}
+            {% if post.category == category[0] %}
+              {% assign category_count = category_count | plus: 1 %}
+            {% endif %}
+          {% endfor %}
+          <span class="stat-number">{{ category_count }}</span>
+          <div class="stat-label">{{ category[1].title }}</div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+<!-- 比赛列表 -->
 {% if site.competition_category %}
   {% for category in site.competition_category %}
     {% assign title_shown = false %}
@@ -77,14 +431,204 @@ author_profile: true
         {% continue %}
       {% endif %}
       {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
+        <div class="competition-category">
+          <h2 class="category-title">{{ category[1].title }}</h2>
+          <hr class="category-divider" />
+        </div>
         {% assign title_shown = true %}
       {% endunless %}
-      {% include competition-single.html %}
+      
+      <article class="competition-item">
+        <div class="competition-container">
+          <div class="competition-content">
+            <div class="competition-header">
+              <h3 class="competition-title">
+                {% if post.competition_url %}
+                  <a href="{{ post.competition_url }}" target="_blank">{{ post.title }}</a>
+                {% else %}
+                  <a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a>
+                {% endif %}
+              </h3>
+              
+              <div class="competition-meta">
+                {% if post.date %}
+                  <div class="meta-item">
+                    <i class="fa fa-calendar"></i>
+                    <span>{{ post.date | date: "%B %Y" }}</span>
+                  </div>
+                {% endif %}
+                
+                {% if post.location %}
+                  <div class="meta-item">
+                    <i class="fa fa-map-marker"></i>
+                    <span>{{ post.location }}</span>
+                  </div>
+                {% endif %}
+                
+                {% if post.team_size %}
+                  <div class="meta-item">
+                    <i class="fa fa-users"></i>
+                    <span>{{ post.team_size }} members</span>
+                  </div>
+                {% endif %}
+              </div>
+              
+              {% if post.rank %}
+                {% assign rank_class = "other-place" %}
+                {% if post.rank contains "1st" or post.rank contains "First" or post.rank contains "Champion" %}
+                  {% assign rank_class = "first-place" %}
+                {% elsif post.rank contains "2nd" or post.rank contains "Second" %}
+                  {% assign rank_class = "second-place" %}
+                {% elsif post.rank contains "3rd" or post.rank contains "Third" %}
+                  {% assign rank_class = "third-place" %}
+                {% endif %}
+                <div class="competition-rank {{ rank_class }}">
+                  <i class="fa fa-trophy"></i> {{ post.rank }}
+                </div>
+              {% endif %}
+            </div>
+            
+            {% if post.excerpt %}
+              <div class="competition-description">
+                {{ post.excerpt | markdownify | strip_html }}
+              </div>
+            {% endif %}
+            
+            {% if post.skills %}
+              <div class="achievement-badges">
+                {% assign skills_array = post.skills | split: "," %}
+                {% for skill in skills_array %}
+                  <span class="achievement-badge">{{ skill | strip }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+            
+            <div class="competition-footer">
+              <div class="competition-links">
+                {% if post.competition_url %}
+                  <a href="{{ post.competition_url }}" target="_blank" class="comp-link comp-link--website">
+                    <i class="fa fa-external-link"></i>
+                    <span>Competition</span>
+                  </a>
+                {% endif %}
+                {% if post.code_url %}
+                  <a href="{{ post.code_url }}" target="_blank" class="comp-link comp-link--code">
+                    <i class="fa fa-code"></i>
+                    <span>Code</span>
+                  </a>
+                {% endif %}
+                <a href="{{ base_path }}{{ post.url }}" class="comp-link comp-link--details">
+                  <i class="fa fa-info-circle"></i>
+                  <span>Details</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          {% if post.image %}
+            <div class="competition-image">
+              <img src="{{ post.image | prepend: "/images/" | prepend: base_path }}" alt="{{ post.title }}">
+            </div>
+          {% endif %}
+        </div>
+      </article>
     {% endfor %}
   {% endfor %}
 {% else %}
   {% for post in site.competitions reversed %}
-    {% include competition-single.html %}
+    <article class="competition-item">
+      <div class="competition-container">
+        <div class="competition-content">
+          <div class="competition-header">
+            <h3 class="competition-title">
+              {% if post.competition_url %}
+                <a href="{{ post.competition_url }}" target="_blank">{{ post.title }}</a>
+              {% else %}
+                <a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a>
+              {% endif %}
+            </h3>
+            
+            <div class="competition-meta">
+              {% if post.date %}
+                <div class="meta-item">
+                  <i class="fa fa-calendar"></i>
+                  <span>{{ post.date | date: "%B %Y" }}</span>
+                </div>
+              {% endif %}
+              
+              {% if post.location %}
+                <div class="meta-item">
+                  <i class="fa fa-map-marker"></i>
+                  <span>{{ post.location }}</span>
+                </div>
+              {% endif %}
+              
+              {% if post.team_size %}
+                <div class="meta-item">
+                  <i class="fa fa-users"></i>
+                  <span>{{ post.team_size }} members</span>
+                </div>
+              {% endif %}
+            </div>
+            
+            {% if post.rank %}
+              {% assign rank_class = "other-place" %}
+              {% if post.rank contains "1st" or post.rank contains "First" or post.rank contains "Champion" %}
+                {% assign rank_class = "first-place" %}
+              {% elsif post.rank contains "2nd" or post.rank contains "Second" %}
+                {% assign rank_class = "second-place" %}
+              {% elsif post.rank contains "3rd" or post.rank contains "Third" %}
+                {% assign rank_class = "third-place" %}
+              {% endif %}
+              <div class="competition-rank {{ rank_class }}">
+                <i class="fa fa-trophy"></i> {{ post.rank }}
+              </div>
+            {% endif %}
+          </div>
+          
+          {% if post.excerpt %}
+            <div class="competition-description">
+              {{ post.excerpt | markdownify | strip_html }}
+            </div>
+          {% endif %}
+          
+          {% if post.skills %}
+            <div class="achievement-badges">
+              {% assign skills_array = post.skills | split: "," %}
+              {% for skill in skills_array %}
+                <span class="achievement-badge">{{ skill | strip }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+          
+          <div class="competition-footer">
+            <div class="competition-links">
+              {% if post.competition_url %}
+                <a href="{{ post.competition_url }}" target="_blank" class="comp-link comp-link--website">
+                  <i class="fa fa-external-link"></i>
+                  <span>Competition</span>
+                </a>
+              {% endif %}
+              {% if post.code_url %}
+                <a href="{{ post.code_url }}" target="_blank" class="comp-link comp-link--code">
+                  <i class="fa fa-code"></i>
+                  <span>Code</span>
+                </a>
+              {% endif %}
+              <a href="{{ base_path }}{{ post.url }}" class="comp-link comp-link--details">
+                <i class="fa fa-info-circle"></i>
+                <span>Details</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        {% if post.image %}
+          <div class="competition-image">
+            <img src="{{ post.image | prepend: "/images/" | prepend: base_path }}" alt="{{ post.title }}">
+          </div>
+        {% endif %}
+      </div>
+    </article>
   {% endfor %}
 {% endif %}
