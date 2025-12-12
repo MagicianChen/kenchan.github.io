@@ -12,50 +12,396 @@
   {% assign title = post.title %}
 {% endif %}
 
-<div class="{{ include.type | default: "list" }}__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    {% if include.type == "grid" and teaser %}
-      <div class="archive__item-teaser">
-        <img src=
-          {% if teaser contains "://" %}
-            "{{ teaser }}"
-          {% else %}
-            "{{ teaser | prepend: "/images/" | prepend: base_path }}"
-          {% endif %}
-          alt="">
-      </div>
-    {% endif %}
+<style>
+/* 应用卡片基础样式 */
+.application-card {
+  margin-bottom: 2rem;
+}
 
-    <h2 class="archive__item-title" itemprop="headline">
-      {% if post.link %}
-        <a href="{{ post.link }}">{{ title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
-      {% else %}
-        <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
-      {% endif %}
-    </h2>
+.application__item {
+  background: #ffffff;
+  border: 1px solid #e1e8ed;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.application__item:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  border-color: #007bff;
+}
+
+/* 应用卡片容器 */
+.application__container {
+  display: flex;
+  padding: 1.5rem;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+/* 应用图标/截图 */
+.application__image {
+  flex-shrink: 0;
+}
+
+.application__icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid #e1e8ed;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 应用内容区域 */
+.application__content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* 应用标题和类型 */
+.application__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.application__title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.application__title-link {
+  color: #2c3e50;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.application__title-link:hover {
+  color: #007bff;
+}
+
+.application__permalink {
+  color: #6c757d;
+  font-size: 0.9rem;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.application__permalink:hover {
+  opacity: 1;
+  color: #007bff;
+}
+
+.application__type {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* 应用描述 */
+.application__description {
+  color: #5a6c7d;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+/* 最新更新样式 */
+.application__update {
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f7ff 100%);
+  border: 1px solid #e3f2fd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.application__update::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  border-radius: 2px 0 0 2px;
+}
+
+.update__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.update__icon {
+  color: #007bff;
+  font-size: 1rem;
+}
+
+.update__label {
+  font-weight: 600;
+  color: #007bff;
+  font-size: 0.9rem;
+}
+
+.update__date {
+  background: #007bff;
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-left: auto;
+}
+
+.update__content {
+  margin: 0;
+  color: #4a5568;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* 底部链接和按钮 */
+.application__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f1f3f4;
+}
+
+.application__links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.app-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid;
+}
+
+.app-link--website {
+  background: #f8f9fa;
+  color: #28a745;
+  border-color: #28a745;
+}
+
+.app-link--website:hover {
+  background: #28a745;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.app-link--app {
+  background: #f8f9fa;
+  color: #007bff;
+  border-color: #007bff;
+}
+
+.app-link--app:hover {
+  background: #007bff;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.application__details-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.application__details-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  color: white;
+}
+
+.application__details-btn i {
+  transition: transform 0.3s ease;
+}
+
+.application__details-btn:hover i {
+  transform: translateX(2px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .application__container {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .application__image {
+    align-self: center;
+  }
+  
+  .application__header {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .application__footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .application__links {
+    justify-content: center;
+  }
+  
+  .update__header {
+    justify-content: center;
+  }
+  
+  .update__date {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .application__icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .application__title {
+    font-size: 1.1rem;
+  }
+  
+  .application__links {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .app-link {
+    justify-content: center;
+  }
+}
+</style>
+
+<div class="{{ include.type | default: "list" }}__item application-card">
+  <article class="archive__item application__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    {% if post.app_url or post.website_url %}
-      <p class="archive__item-excerpt">
-        {% if post.app_url %}<a href="{{ post.app_url }}" target="_blank"><i class="fa fa-mobile"></i> App</a>{% endif %}
-        {% if post.app_url and post.website_url %} | {% endif %}
-        {% if post.website_url %}<a href="{{ post.website_url }}" target="_blank"><i class="fa fa-globe"></i> Website</a>{% endif %}
-      </p>
-    {% endif %}
+    <!-- 应用卡片容器 -->
+    <div class="application__container">
+      
+      <!-- 左侧：应用图标/截图 -->
+      {% if teaser %}
+        <div class="application__image">
+          <img src=
+            {% if teaser contains "://" %}
+              "{{ teaser }}"
+            {% else %}
+              "{{ teaser | prepend: "/images/" | prepend: base_path }}"
+            {% endif %}
+            alt="{{ title }}" class="application__icon">
+        </div>
+      {% endif %}
 
-    {% if post.excerpt %}
-      <p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>
-    {% endif %}
+      <!-- 右侧：应用信息 -->
+      <div class="application__content">
+        
+        <!-- 应用标题和类型 -->
+        <div class="application__header">
+          <h3 class="application__title" itemprop="headline">
+            {% if post.link %}
+              <a href="{{ post.link }}" class="application__title-link">{{ title }}</a>
+              <a href="{{ base_path }}{{ post.url }}" rel="permalink" class="application__permalink">
+                <i class="fa fa-info-circle" aria-hidden="true" title="详细信息"></i>
+              </a>
+            {% else %}
+              <a href="{{ base_path }}{{ post.url }}" rel="permalink" class="application__title-link">{{ title }}</a>
+            {% endif %}
+          </h3>
+          {% if post.type %}
+            <span class="application__type">{{ post.type }}</span>
+          {% endif %}
+        </div>
 
-    <!-- 新增：显示最新更新信息 -->
-    {% if post.last_updated and post.latest_update %}
-      <div class="archive__item-update">
-        <p class="archive__item-excerpt">
-          <strong><i class="fa fa-clock-o"></i> Latest Update ({{ post.last_updated }}):</strong> 
-          <span style="font-style: italic;">{{ post.latest_update }}</span>
-        </p>
+        <!-- 应用描述 -->
+        {% if post.excerpt %}
+          <p class="application__description" itemprop="description">
+            {{ post.excerpt | markdownify | strip_html | truncate: 120 }}
+          </p>
+        {% endif %}
+
+        <!-- 最新更新信息 -->
+        {% if post.latest_update %}
+          <div class="application__update">
+            <div class="update__header">
+              <i class="fa fa-rocket update__icon"></i>
+              <span class="update__label">最新更新</span>
+              {% if post.last_updated %}
+                <span class="update__date">{{ post.last_updated }}</span>
+              {% endif %}
+            </div>
+            <p class="update__content">{{ post.latest_update }}</p>
+          </div>
+        {% endif %}
+
+        <!-- 底部：链接和操作 -->
+        <div class="application__footer">
+          <div class="application__links">
+            {% if post.website_url %}
+              <a href="{{ post.website_url }}" target="_blank" class="app-link app-link--website">
+                <i class="fa fa-globe"></i>
+                <span>网站</span>
+              </a>
+            {% endif %}
+            {% if post.app_url %}
+              <a href="{{ post.app_url }}" target="_blank" class="app-link app-link--app">
+                <i class="fa fa-mobile"></i>
+                <span>下载</span>
+              </a>
+            {% endif %}
+          </div>
+          
+          <a href="{{ base_path }}{{ post.url }}" class="application__details-btn">
+            <span>查看详情</span>
+            <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+
       </div>
-    {% elsif post.last_updated %}
-      <p class="archive__item-excerpt"><strong><i class="fa fa-clock-o"></i> Last Updated:</strong> {{ post.last_updated }}</p>
-    {% endif %}
+    </div>
   </article>
 </div>
