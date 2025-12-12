@@ -13,15 +13,13 @@ My research sits at the intersection of **artificial intelligence and real-world
 
 Beyond academia, I have demonstrated my ability to translate research insights into market-ready products. My entrepreneurial ventures include **RapiLearn AI**, an intelligent education platform, and **UUTrip.ai**, an automated travel planning system—both of which exemplify my commitment to leveraging AI for societal benefit.
 
-I believe in the power of **research-driven innovation** and strive to contribute both to the scientific community through publications and to society through impactful AI applications.
-
 You can find my CV here: [GUANHUA CHEN's CV](../assets/CV.pdf).
 
 Research Interests
 ======
-- LLM Agents System
-- LLMs for Education and Traveling Application
-- Multi-Modal RAG for LLMs
+- Personalized LLM
+- LLM Agents
+- Multi-Modal RAG
 
 AI Applications & Products
 ======
