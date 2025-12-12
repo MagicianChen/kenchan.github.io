@@ -5,32 +5,479 @@ permalink: /publications/
 author_profile: true
 ---
 
-{% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
-{% endif %}
+<style>
+/* Publications 页面样式 */
+.publications-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+}
+
+.publications-header h1 {
+  margin: 0 0 1rem 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.scholar-link {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.scholar-link:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.scholar-link a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.scholar-link a:hover {
+  color: white;
+}
+
+/* 分类标题样式 */
+.publication-category {
+  margin: 3rem 0 2rem 0;
+  position: relative;
+}
+
+.category-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.category-title::before {
+  content: '';
+  width: 4px;
+  height: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 2px;
+}
+
+.category-divider {
+  height: 2px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, transparent 100%);
+  border: none;
+  margin: 1rem 0 2rem 0;
+  border-radius: 1px;
+}
+
+/* 论文卡片样式 */
+.publication-item {
+  background: #ffffff;
+  border: 1px solid #e1e8ed;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.publication-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.publication-item:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  border-color: #667eea;
+}
+
+.publication-item:hover::before {
+  transform: scaleX(1);
+}
+
+.publication-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.publication-title a {
+  color: #2c3e50;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.publication-title a:hover {
+  color: #667eea;
+}
+
+.publication-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.publication-venue {
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f7ff 100%);
+  color: #667eea;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid #e3f2fd;
+}
+
+.publication-year {
+  background: #667eea;
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.publication-authors {
+  color: #5a6c7d;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.publication-authors strong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.publication-excerpt {
+  color: #5a6c7d;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.publication-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.pub-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid;
+}
+
+.pub-link--paper {
+  background: #f8f9fa;
+  color: #007bff;
+  border-color: #007bff;
+}
+
+.pub-link--paper:hover {
+  background: #007bff;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.pub-link--code {
+  background: #f8f9fa;
+  color: #28a745;
+  border-color: #28a745;
+}
+
+.pub-link--code:hover {
+  background: #28a745;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.pub-link--slides {
+  background: #f8f9fa;
+  color: #fd7e14;
+  border-color: #fd7e14;
+}
+
+.pub-link--slides:hover {
+  background: #fd7e14;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(253, 126, 20, 0.3);
+}
+
+/* 统计信息 */
+.publications-stats {
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f7ff 100%);
+  border: 1px solid #e3f2fd;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.stat-item {
+  padding: 1rem;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #667eea;
+  display: block;
+}
+
+.stat-label {
+  color: #5a6c7d;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .publications-header h1 {
+    font-size: 2rem;
+  }
+  
+  .publication-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .publication-links {
+    flex-direction: column;
+  }
+  
+  .pub-link {
+    justify-content: center;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .publications-header {
+    padding: 1.5rem;
+  }
+  
+  .publication-item {
+    padding: 1rem;
+  }
+  
+  .publication-title {
+    font-size: 1.1rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<!-- 页面头部 -->
+<div class="publications-header">
+  <h1><i class="fa fa-file-text-o"></i> Publications</h1>
+  {% if site.author.googlescholar %}
+    <div class="scholar-link">
+      <a href="{{site.author.googlescholar}}" target="_blank">
+        <i class="fa fa-graduation-cap"></i>
+        You can also find my articles on my Google Scholar profile
+      </a>
+    </div>
+  {% endif %}
+</div>
+
+<!-- 统计信息 -->
+<div class="publications-stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <span class="stat-number">{{ site.publications | size }}</span>
+      <div class="stat-label">Total Publications</div>
+    </div>
+    {% if site.publication_category %}
+      {% for category in site.publication_category %}
+        <div class="stat-item">
+          {% assign category_count = 0 %}
+          {% for post in site.publications %}
+            {% if post.category == category[0] %}
+              {% assign category_count = category_count | plus: 1 %}
+            {% endif %}
+          {% endfor %}
+          <span class="stat-number">{{ category_count }}</span>
+          <div class="stat-label">{{ category[1].title }}</div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
 
 {% include base_path %}
 
-<!-- New style rendering if publication categories are defined -->
+<!-- 论文列表 -->
 {% if site.publication_category %}
-  {% for category in site.publication_category  %}
+  {% for category in site.publication_category %}
     {% assign title_shown = false %}
     {% for post in site.publications reversed %}
       {% if post.category != category[0] %}
         {% continue %}
       {% endif %}
       {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
+        <div class="publication-category">
+          <h2 class="category-title">{{ category[1].title }}</h2>
+          <hr class="category-divider" />
+        </div>
         {% assign title_shown = true %}
       {% endunless %}
-      {% include archive-single.html %}
+      
+      <article class="publication-item">
+        <h3 class="publication-title">
+          {% if post.paperurl %}
+            <a href="{{ post.paperurl }}" target="_blank">{{ post.title }}</a>
+          {% else %}
+            <a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a>
+          {% endif %}
+        </h3>
+        
+        <div class="publication-meta">
+          {% if post.venue %}
+            <span class="publication-venue">{{ post.venue }}</span>
+          {% endif %}
+          {% if post.date %}
+            <span class="publication-year">{{ post.date | date: "%Y" }}</span>
+          {% endif %}
+        </div>
+        
+        {% if post.authors %}
+          <div class="publication-authors">{{ post.authors }}</div>
+        {% endif %}
+        
+        {% if post.excerpt %}
+          <div class="publication-excerpt">{{ post.excerpt }}</div>
+        {% endif %}
+        
+        <div class="publication-links">
+          {% if post.paperurl %}
+            <a href="{{ post.paperurl }}" target="_blank" class="pub-link pub-link--paper">
+              <i class="fa fa-file-pdf-o"></i>
+              <span>Paper</span>
+            </a>
+          {% endif %}
+          {% if post.codeurl %}
+            <a href="{{ post.codeurl }}" target="_blank" class="pub-link pub-link--code">
+              <i class="fa fa-code"></i>
+              <span>Code</span>
+            </a>
+          {% endif %}
+          {% if post.slidesurl %}
+            <a href="{{ post.slidesurl }}" target="_blank" class="pub-link pub-link--slides">
+              <i class="fa fa-slideshare"></i>
+              <span>Slides</span>
+            </a>
+          {% endif %}
+          <a href="{{ base_path }}{{ post.url }}" class="pub-link pub-link--paper">
+            <i class="fa fa-info-circle"></i>
+            <span>Details</span>
+          </a>
+        </div>
+      </article>
     {% endfor %}
   {% endfor %}
 {% else %}
   {% for post in site.publications reversed %}
-    {% include archive-single.html %}
+    <article class="publication-item">
+      <h3 class="publication-title">
+        {% if post.paperurl %}
+          <a href="{{ post.paperurl }}" target="_blank">{{ post.title }}</a>
+        {% else %}
+          <a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a>
+        {% endif %}
+      </h3>
+      
+      <div class="publication-meta">
+        {% if post.venue %}
+          <span class="publication-venue">{{ post.venue }}</span>
+        {% endif %}
+        {% if post.date %}
+          <span class="publication-year">{{ post.date | date: "%Y" }}</span>
+        {% endif %}
+      </div>
+      
+      {% if post.authors %}
+        <div class="publication-authors">{{ post.authors }}</div>
+      {% endif %}
+      
+      {% if post.excerpt %}
+        <div class="publication-excerpt">{{ post.excerpt }}</div>
+      {% endif %}
+      
+      <div class="publication-links">
+        {% if post.paperurl %}
+          <a href="{{ post.paperurl }}" target="_blank" class="pub-link pub-link--paper">
+            <i class="fa fa-file-pdf-o"></i>
+            <span>Paper</span>
+          </a>
+        {% endif %}
+        {% if post.codeurl %}
+          <a href="{{ post.codeurl }}" target="_blank" class="pub-link pub-link--code">
+            <i class="fa fa-code"></i>
+            <span>Code</span>
+          </a>
+        {% endif %}
+        {% if post.slidesurl %}
+          <a href="{{ post.slidesurl }}" target="_blank" class="pub-link pub-link--slides">
+            <i class="fa fa-slideshare"></i>
+            <span>Slides</span>
+          </a>
+        {% endif %}
+        <a href="{{ base_path }}{{ post.url }}" class="pub-link pub-link--paper">
+          <i class="fa fa-info-circle"></i>
+          <span>Details</span>
+        </a>
+      </div>
+    </article>
   {% endfor %}
 {% endif %}
-
-
-
