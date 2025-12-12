@@ -7,11 +7,9 @@ redirect_from:
   - /about.html
 ---
 
-I am a third-year PhD student in Computer Science at the [University of Macau](https://www.um.edu.mo/), where I am privileged to work under the guidance of [Prof. Derek F. Wong](https://www.fst.um.edu.mo/personal/derek-wong/) at the [NLP2CT](https://nlp2ct.cis.umac.mo/) Lab. As an entrepreneur-researcher, I co-founded a startup and have successfully developed multiple AI-driven applications that serve thousands of users worldwide.
+I am a third-year **PhD student in Computer Science** at the [University of Macau](https://www.um.edu.mo/){:target="_self"}, where I am privileged to work under the guidance of [Prof. Derek F. Wong](https://www.fst.um.edu.mo/personal/derek-wong/){:target="_self"} at the [NLP2CT](https://nlp2ct.cis.umac.mo/){:target="_self"} Lab. I am passionate about developing **AI-driven applications** that bridge the gap between academic research and real-world solutions, serving **thousands of users worldwide**. My research portfolio centers on three core areas: **Personalized Large Language Models**, **LLM Agents**, and **Multi-Modal Retrieval-Augmented Generation (RAG)**. Through systematic investigation in these domains, I explore how to create more **adaptive and context-aware AI systems**, with particular emphasis on developing **personalized dialogue systems** and **intelligent agent frameworks** that can understand and respond to individual user needs, while leveraging multi-modal RAG techniques to enhance knowledge integration and retrieval capabilities across diverse applications in **education and travel domains**.
 
-My research sits at the intersection of **artificial intelligence and real-world impact**, with a particular focus on dialogue systems, educational AI, and multi-modal retrieval-augmented generation (RAG) for large language models. I am passionate about bridging the gap between cutting-edge research and practical applications that solve meaningful problems in education and travel domains.
-
-Beyond academia, I have demonstrated my ability to translate research insights into market-ready products. My entrepreneurial ventures include **RapiLearn AI**, an intelligent education platform, and **UUTrip.ai**, an automated travel planning system—both of which exemplify my commitment to leveraging AI for societal benefit.
+As a **researcher with strong application development skills**, I have actively participated in various [**algorithm competitions and research challenges**](../competitions/){:target="_self"}, where I continuously refine my research methodology and problem-solving capabilities. My passion for **applied AI research** has led me to develop **intelligent education platforms** and **automated travel planning systems**—demonstrating how theoretical advances can create tangible societal impact. You can explore my [**research-driven AI applications**](../applications){:target="_self"} to see how I transform academic concepts into practical solutions.
 
 You can find my CV here: [GUANHUA CHEN's CV](../assets/CV.pdf).
 
@@ -20,18 +18,3 @@ Research Interests
 - Personalized LLM
 - LLM Agents
 - Multi-Modal RAG
-
-AI Applications & Products
-======
-
-### [RapiLearn AI](https://rapilearn.com) 
-**Intelligent Education Platform**
-- An AI-powered educational platform that leverages large language models to provide personalized learning experiences
-- Features intelligent tutoring, adaptive content generation, and real-time learning analytics
-- Technologies: LLMs, Natural Language Processing, Educational Data Mining
-
-### [UUTrip.ai](https://uutrip.ai)
-**Automated Travel Planning Platform** 
-- An intelligent travel planning application that automatically generates personalized itineraries based on user preferences
-- Integrates multi-modal data processing for destination recommendations, route optimization, and real-time travel insights
-- Technologies: Multi-modal AI, Recommendation Systems, Geographic Information Systems
