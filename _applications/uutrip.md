@@ -16,7 +16,7 @@ header:
 UUTrip is an innovative AI-driven platform focused on simplifying the travel planning process. As a free tool, it intelligently analyzes user preferences through chat interactions to help travelers quickly generate customized itinerary suggestions, particularly for Macau - a city that blends Eastern and Western cultures. The platform not only covers diverse themes including history, culture, cuisine, and photography, but also integrates online shopping services for Macau specialties, providing a one-stop experience from itinerary design to souvenir purchasing. Users can easily enjoy the convenience of the smart travel era without switching between multiple applications. Whether you're a first-time visitor to Macau or a traveler seeking in-depth exploration, UU Trip provides thoughtful consultation and recommendations to help discover Macau's unique charm.
 
 ### WeChat Mini-program QR Code
-![QRCODE](uutripqrcode.jpg)
+![QRCODE](/images/uutripqrcode.jpg)
 
 ## Features
 - **Personalized Itinerary Customization**: Users can obtain AI-generated exclusive travel plans through simple questionnaires or AI chat interactions, avoiding the complexity of traditional planning methods.
