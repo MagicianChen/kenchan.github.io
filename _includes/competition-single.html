@@ -1,0 +1,31 @@
+{% include base_path %}
+
+<div class="competition-item">
+  <div class="competition-content">
+    <h3 class="competition-title">
+      <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ post.title }}</a>
+    </h3>
+    
+    <p class="competition-meta">
+      <strong>Date:</strong> {{ post.date | date: "%B %Y" }}
+    </p>
+    
+    {% if post.award_description %}
+    <p class="competition-description">
+      {{ post.award_description }}
+    </p>
+    {% endif %}
+    
+    {% if post.competition_url %}
+    <p class="competition-meta">
+      <a href="{{ post.competition_url }}" target="_blank">🔗 Competition Link</a>
+    </p>
+    {% endif %}
+  </div>
+  
+  {% if post.certificate_image %}
+  <div class="competition-image">
+    <img src="{{ base_path }}{{ post.certificate_image }}" alt="{{ post.title }} Certificate">
+  </div>
+  {% endif %}
+</div>
