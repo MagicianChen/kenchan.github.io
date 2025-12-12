@@ -46,8 +46,16 @@
       <p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>
     {% endif %}
 
-    {% if post.last_updated %}
-      <p class="archive__item-excerpt"><strong>Last Updated:</strong> {{ post.last_updated }}</p>
+    <!-- 新增：显示最新更新信息 -->
+    {% if post.last_updated and post.latest_update %}
+      <div class="archive__item-update">
+        <p class="archive__item-excerpt">
+          <strong><i class="fa fa-clock-o"></i> Latest Update ({{ post.last_updated }}):</strong> 
+          <span style="font-style: italic;">{{ post.latest_update }}</span>
+        </p>
+      </div>
+    {% elsif post.last_updated %}
+      <p class="archive__item-excerpt"><strong><i class="fa fa-clock-o"></i> Last Updated:</strong> {{ post.last_updated }}</p>
     {% endif %}
   </article>
 </div>
