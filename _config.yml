@@ -256,15 +256,6 @@ defaults:
       comments: true
       share: true
       related: true
-  # _applications  # 新增这个部分
-  - scope:
-      path: ""
-      type: applications
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comments: true
 
   # _pages
   - scope:
@@ -295,6 +286,15 @@ defaults:
   - scope:
       path: ""
       type: competitions
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: true
+  # _applications  # 新增这个部分
+  - scope:
+      path: ""
+      type: applications
     values:
       layout: single
       author_profile: true
