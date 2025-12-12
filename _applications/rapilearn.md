@@ -9,7 +9,7 @@ last_updated: "2025-10-25"
 latest_update: "Added note module in course."
 website_url: "https://rapilearn.com"
 header:
-  teaser: "rapilearn.jpg"
+  teaser: "rapilearn.png"
 ---
 
 ## Application Overview
