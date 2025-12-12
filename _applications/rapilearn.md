@@ -3,9 +3,10 @@ title: "RapiLearn AI"
 collection: applications
 type: "Web/Mobile Application"
 permalink: /applications/rapilearn/
-excerpt: "This is a brief description of my awesome application that does amazing things."
+excerpt: "An AI learning platform that integrates AI educational agents with AI-customized multimodal learning content."
 date: 2025-03-15
 last_updated: "2025-10-25"
+latest_update: "Added note module in course."
 website_url: "https://rapilearn.com"
 header:
   teaser: "app-screenshot.png"
