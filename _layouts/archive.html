@@ -17,9 +17,9 @@ layout: default
 
   <div class="archive">
     {% unless page.header.overlay_color or page.header.overlay_image %}
-      {% unless page.title == "Biography" %}
+      {% if page.title == "Biography" %}
         <h1 class="page__title">{{ page.title }}</h1>
-      {% endunless %}
+      {% endif %}
     {% endunless %}
     {{ content }}
   </div>
