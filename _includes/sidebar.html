@@ -30,7 +30,7 @@
     height: auto;
     min-height: auto;
     position: relative;
-    transform: none !important; /* 移动端禁用悬浮效果 */
+    transform: none !important;
   }
   
   .sidebar.sticky:hover {
@@ -72,10 +72,11 @@
   .author__avatar {
     display: table-cell;
     vertical-align: top;
-    width: 80px;
+    width: 100px; /* 增加宽度 */
     justify-content: flex-start;
     margin-bottom: 0;
     padding-top: 15px;
+    padding-right: 10px; /* 添加右边距 */
   }
 }
 
@@ -104,8 +105,8 @@
 /* 移动端头像 */
 @media screen and (max-width: 1023px) {
   .author__avatar img {
-    width: 60px;
-    height: 60px;
+    width: 80px; /* 增加头像大小 */
+    height: 80px;
     border: 2px solid #ffffff;
   }
 }
@@ -121,11 +122,12 @@
   .author__content {
     display: table-cell;
     vertical-align: top;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px; /* 减少左边距 */
+    padding-right: 10px;
     text-align: left;
     line-height: 1.2;
     margin-bottom: 0;
+    width: auto; /* 让内容区域自适应 */
   }
 }
 
@@ -151,8 +153,9 @@
 /* 移动端姓名 */
 @media screen and (max-width: 1023px) {
   .author__name {
-    font-size: 1rem;
+    font-size: 1.1rem; /* 稍微增大字体 */
     margin: 0 0 5px 0;
+    font-weight: 600;
   }
 }
 
@@ -166,7 +169,7 @@
 /* 移动端描述 */
 @media screen and (max-width: 1023px) {
   .author__bio {
-    font-size: 0.8rem;
+    font-size: 0.85rem; /* 稍微增大字体 */
     margin: 0;
     line-height: 1.4;
   }
@@ -183,7 +186,8 @@
     display: table-cell;
     vertical-align: middle;
     margin-top: 0;
-    width: auto;
+    width: 50px; /* 给链接区域固定宽度 */
+    padding-left: 5px;
   }
 }
 
@@ -207,7 +211,8 @@
 @media screen and (max-width: 1023px) {
   .author__urls-wrapper li {
     margin-bottom: 2px;
-    padding: 4px 6px;
+    padding: 4px;
+    text-align: center;
   }
   
   .author__urls-wrapper li:hover {
@@ -229,7 +234,7 @@
 /* 移动端链接文字 */
 @media screen and (max-width: 1023px) {
   .author__urls-wrapper a {
-    font-size: 0.8rem;
+    font-size: 0;  /* 隐藏文字，只显示图标 */
   }
 }
 
@@ -259,12 +264,13 @@
   .author__urls-wrapper .fa,
   .author__urls-wrapper .fas,
   .author__urls-wrapper .fab {
-    width: 16px;
-    font-size: 0.9rem;
+    width: 18px;
+    font-size: 1.1rem;
+    display: block;
   }
 }
 
-/* 移动端作者信息整体布局修正 */
+/* 移动端整体布局容器 */
 @media screen and (max-width: 1023px) {
   .sidebar .author__avatar,
   .sidebar .author__content,
@@ -273,13 +279,18 @@
     vertical-align: top;
   }
   
+  /* 确保容器有足够的宽度 */
+  .sidebar .author__avatar {
+    min-width: 100px;
+  }
+  
   .sidebar .author__content {
-    padding-left: 15px;
-    padding-right: 10px;
+    width: auto;
+    min-width: 200px;
   }
   
   .sidebar .author__urls-wrapper {
-    padding-left: 0;
+    width: 50px;
   }
 }
 </style>
