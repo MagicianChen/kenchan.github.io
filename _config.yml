@@ -84,6 +84,14 @@ publication_category:
   preprint:
     title: 'arXiv preprint'
 
+# Competition Category - The following the list of competition categories and their headings
+competition_category:
+  nlp:
+    title: 'Natural Language Processing'
+  startup:
+    title: 'Start-up Competition"
+
+
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)
@@ -215,6 +223,9 @@ collections:
     output: true
     permalink: /:collection/:path/
   publications:
+    output: true
+    permalink: /:collection/:path/
+  competitions:
     output: true
     permalink: /:collection/:path/
   portfolio:
