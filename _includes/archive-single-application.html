@@ -346,7 +346,7 @@
             {% if post.link %}
               <a href="{{ post.link }}" class="application__title-link">{{ title }}</a>
               <a href="{{ base_path }}{{ post.url }}" rel="permalink" class="application__permalink">
-                <i class="fa fa-info-circle" aria-hidden="true" title="详细信息"></i>
+                <i class="fa fa-info-circle" aria-hidden="true" title="Detail"></i>
               </a>
             {% else %}
               <a href="{{ base_path }}{{ post.url }}" rel="permalink" class="application__title-link">{{ title }}</a>
@@ -369,7 +369,7 @@
           <div class="application__update">
             <div class="update__header">
               <i class="fa fa-rocket update__icon"></i>
-              <span class="update__label">最新更新</span>
+              <span class="update__label">Lasted Updated</span>
               {% if post.last_updated %}
                 <span class="update__date">{{ post.last_updated }}</span>
               {% endif %}
@@ -384,19 +384,19 @@
             {% if post.website_url %}
               <a href="{{ post.website_url }}" target="_blank" class="app-link app-link--website">
                 <i class="fa fa-globe"></i>
-                <span>网站</span>
+                <span>Website</span>
               </a>
             {% endif %}
             {% if post.app_url %}
               <a href="{{ post.app_url }}" target="_blank" class="app-link app-link--app">
                 <i class="fa fa-mobile"></i>
-                <span>下载</span>
+                <span>Download</span>
               </a>
             {% endif %}
           </div>
           
           <a href="{{ base_path }}{{ post.url }}" class="application__details-btn">
-            <span>查看详情</span>
+            <span>Know More</span>
             <i class="fa fa-arrow-right"></i>
           </a>
         </div>
