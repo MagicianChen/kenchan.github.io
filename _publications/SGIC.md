@@ -6,7 +6,7 @@ permalink: /publication/SGIC
 excerpt: 'Guanhua Chen, Yutong Yao, Lidia S. Chao, Xuebo Liu, Derek F. Wong'
 date: 2025-05-19
 venue: 'ACL(2025)'
-paperurl: '[http://academicpages.github.io/files/SGIC.pdf](paper.pdf)'
+paperurl: '[https://aclanthology.org/2025.acl-long.1376.pdf](paper.pdf)'
 ---
 
 Recent research in retrieval-augmented generation (RAG) has concentrated on retrieving useful information from candidate documents. However, numerous methodologies frequently neglect the calibration capabilities of large language models (LLMs), which capitalize on their robust in-context reasoning prowess. This work illustrates that providing LLMs with specific cues substantially improves their calibration efficacy, especially in multi-round calibrations. We present a new SGIC: Self-Guided Iterative Calibration Framework that employs uncertainty scores as a tool. Initially, this framework calculates uncertainty scores to determine both the relevance of each document to the query and the confidence level in the responses produced by the LLMs. Subsequently, it reevaluates these scores iteratively, amalgamating them with prior responses to refine calibration. Furthermore, we introduce an innovative approach for constructing an iterative self-calibration training set, which optimizes LLMs to efficiently harness uncertainty scores for capturing critical information and enhancing response accuracy. Our proposed framework significantly improves performance on both closed-source and open-weight LLMs.
