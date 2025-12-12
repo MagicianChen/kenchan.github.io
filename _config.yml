@@ -220,6 +220,7 @@ kramdown:
 
 
 # These settings control the types of collections used by the template
+# These settings control the types of collections used by the template
 collections:
   teaching:
     output: true
@@ -230,12 +231,16 @@ collections:
   competitions:
     output: true
     permalink: /:collection/:path/
+  applications: 
+    output: true
+    permalink: /:collection/:path/
   portfolio:
     output: true
     permalink: /:collection/:path/
   talks:
     output: true
     permalink: /:collection/:path/
+
 
 
 # These settings control how pages and collections are included in the site
@@ -251,6 +256,16 @@ defaults:
       comments: true
       share: true
       related: true
+  # _applications  # 新增这个部分
+  - scope:
+      path: ""
+      type: applications
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: true
+
   # _pages
   - scope:
       path: ""
