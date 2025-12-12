@@ -89,7 +89,9 @@ competition_category:
   nlp:
     title: 'Natural Language Processing'
   startup:
-    title: 'Start-up Competition"
+    title: 'Start-up Competition'
+  application:
+    title: 'AI Application'
 
 
 # Site Settings
