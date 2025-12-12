@@ -623,9 +623,25 @@ author_profile: true
           </div>
         </div>
         
-        {% if post.image %}
+        {% if post.header.teaser %}
           <div class="competition-image">
-            <img src="{{ post.image | prepend: "/images/" | prepend: base_path }}" alt="{{ post.title }}">
+            <img src=
+              {% if post.header.teaser contains "://" %}
+                "{{ post.header.teaser }}"
+              {% else %}
+                "{{ post.header.teaser | prepend: "/images/" | prepend: base_path }}"
+              {% endif %}
+              alt="{{ post.title }}">
+          </div>
+        {% elsif post.image %}
+          <div class="competition-image">
+            <img src=
+              {% if post.image contains "://" %}
+                "{{ post.image }}"
+              {% else %}
+                "{{ post.image | prepend: "/images/" | prepend: base_path }}"
+              {% endif %}
+              alt="{{ post.title }}">
           </div>
         {% endif %}
       </div>
