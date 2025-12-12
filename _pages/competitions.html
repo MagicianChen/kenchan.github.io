@@ -7,9 +7,70 @@ author_profile: true
 
 {% include base_path %}
 
+<style>
+.competition-item {
+  display: flex;
+  align-items: flex-start;
+  margin: 30px 0;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.competition-content {
+  flex: 1;
+  padding-right: 30px;
+}
+
+.competition-image {
+  flex: 0 0 250px;
+  text-align: center;
+}
+
+.competition-image img {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.competition-title {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.competition-meta {
+  color: #666;
+  margin: 5px 0;
+}
+
+.competition-description {
+  margin: 10px 0;
+  line-height: 1.5;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .competition-item {
+    flex-direction: column;
+  }
+  
+  .competition-content {
+    padding-right: 0;
+    margin-bottom: 15px;
+  }
+  
+  .competition-image {
+    flex: none;
+  }
+}
+</style>
+
 <!-- New style rendering if competition categories are defined -->
 {% if site.competition_category %}
-  {% for category in site.competition_category  %}
+  {% for category in site.competition_category %}
     {% assign title_shown = false %}
     {% for post in site.competitions reversed %}
       {% if post.category != category[0] %}
@@ -19,11 +80,11 @@ author_profile: true
         <h2>{{ category[1].title }}</h2><hr />
         {% assign title_shown = true %}
       {% endunless %}
-      {% include archive-single.html %}
+      {% include competition-single.html %}
     {% endfor %}
   {% endfor %}
 {% else %}
   {% for post in site.competitions reversed %}
-    {% include archive-single.html %}
+    {% include competition-single.html %}
   {% endfor %}
 {% endif %}
