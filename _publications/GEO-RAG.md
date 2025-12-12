@@ -1,7 +1,7 @@
 ---
 title: "Standardization and interpretable analysis of geological database using retrieval-augmented large language model"
 collection: publications
-category: conferences
+category: manuscripts
 permalink: /publication/GEO-RAG
 excerpt: 'Wei Yan, Jinhao Wu, Guanhua Chen, Shaoze Su, Ping Shen, Derek F Wong, Wan-Huan Zhou'
 date: 2025-11-30
